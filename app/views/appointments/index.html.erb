@@ -1,0 +1,14 @@
+<div class="container">
+	<% @appointments.each do |appointment| %>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title"><%= appointment&.appointment_number %></h5>
+		    <h6 class="card-subtitle mb-2 text-muted"><%= appointment&.booking_time %></h6>
+		    <p class="card-text"><%= appointment&.description %></p>
+		    <% if appointment.patient_id == current_user.id %>
+		    	<%= link_to 'Cancel Appointment', appointment_path(appointment), :method => :delete %>
+		    <% end %>
+		  </div>
+		</div>
+	<% end %>
+</div>

@@ -1,0 +1,52 @@
+<div class="container">   
+  <%= form_for @appointment, url: {action: :create} do |f| %>   
+      <div>   
+        <h3>Add a Appointment</h3>   
+      </div>   
+      <div>   
+        <p>   
+          <%= "<div class='alert alert-primary' role='alert'>#{@appointment.errors.full_messages.first}</div>".html_safe if @appointment.errors.any? %>   
+       <div class="form-group">
+            <label class="control-label" for="datetimepicker-default">Select Booking Date and Time</label>  
+              <%= f.text_field :booking_time, class: "form-control", id: "datetimepicker1" %>
+        </div>   
+        <div class="form-group">
+           <label>Description</label>   
+              <%= f.text_field :description, class: "form-control" %>   
+        </div>   
+        <div>   
+             <%= f.hidden_field :doctor_id, value: @doctor_id %>   
+        </div>   
+         </p>   
+      </div>   
+      <div>   
+        <%= link_to 'Back', { controller: 'home', action: 'index'} %>   
+        <%= f.submit 'Create Appointment' %>   
+      </div>   
+  <% end %>   
+</div> 
+<script type="text/javascript">
+  const el = document.getElementById('datetimepicker1');
+  var newDate = new Date(new Date().setHours(new Date().getHours() + 1));
+  flatpickr(el, {
+    enableTime:      true,
+    altInput:        true,
+    defaultDate:     newDate,
+    minDate:         "today",
+    defaultHour:     23,
+    defaultMinute:   59,
+    minuteIncrement: 1,
+    time_24hr: true,
+    onOpen: [
+        function(selectedDates, dateStr, instance){
+          
+        }
+    ],
+    onClose: function(selectedDates, dateStr, instance){
+      expiryDate = new Date(new Date().setHours(new Date().getHours() + 1));
+        if (expiryDate > new Date(dateStr)){
+          alert("Please book after "+newDate)
+        }
+    }
+  });
+</script>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PracticalTest</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<% if user_signed_in? %>
+		<div class="container"> 
+			<div>Hello <%= "#{current_user&.name}" %>
+				<p><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></p>
+			</div>
+		</div>
+	<% end %>
+	<%= yield %>
+  </body>
+</html>

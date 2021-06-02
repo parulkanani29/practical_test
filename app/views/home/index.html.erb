@@ -1,0 +1,24 @@
+<% if current_user.role == 'patient'%>
+<div class="container">
+    <h1>Doctors List</h1>
+	<table class="table table-striped">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">Name</th>
+	      <th scope="col">Total Appointment</th>
+	      <th scope="col"></th>
+	    </tr>
+	  </thead>
+	    <tbody>
+		  	<% @doctors.each do |doctor| %>
+			    <!-- <li><%#= "#{doctor.name}" %> <%#= link_to "Hide", "", class: 'hide', data: {'js-hide-link' => true} %></li> -->
+			    <tr>
+			      <td><%= link_to "#{doctor.name}", new_appointment_path(doctor_id: doctor.id) %></td>
+			      <td><%= link_to "#{doctor&.total_appointments}", appointments_path(doctor_id: doctor.id) %></td>
+			      <td></td>
+			    </tr>
+			<% end %>
+	    </tbody>
+	</table>
+</div>
+<% end %>
